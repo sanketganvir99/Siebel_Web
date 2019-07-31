@@ -7,8 +7,9 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariOptions;
 
 public class browser_Setup {
 	
@@ -19,7 +20,7 @@ public class browser_Setup {
 
 		prop = new Properties();
 		FileInputStream fis = new FileInputStream(
-				"C:/Users/sanke/workspace/Siebel_Web/src/main/java/resources/browser_Config.properties");
+				"/Users/yml/git/Siebel_Web/src/main/java/resources/browser_Config.properties");
 
 		prop.load(fis);
 		String browserName = prop.getProperty("browser");
@@ -27,8 +28,6 @@ public class browser_Setup {
 
 		if (browserName.equalsIgnoreCase("Chrome")) {
 			System.out.println("Launching Chrome Browser");
-			System.setProperty("webdriver.chrome.driver",
-					"C:\\Users\\sanke\\workspace\\Siebel_Web\\drivers\\chromedriver.exe");
 			driver = new ChromeDriver();
 			System.out.println("Website is launched");
 			driver.manage().window().maximize();
@@ -36,23 +35,19 @@ public class browser_Setup {
 			System.out.println("Chrome Browser Launched");
 		} else if (browserName.equalsIgnoreCase("Firefox")) {
 			System.out.println("Launcing Firefoc browser");
-			System.setProperty("webdriver.gecko.driver",
-					"C:\\Users\\sanke\\workspace\\Siebel_Web\\drivers\\geckodriver.exe");
 			driver = new FirefoxDriver();
 			driver.manage().window().maximize();
 			driver.manage().deleteAllCookies();
 			System.out.println("Website is launched");
-			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		} else if (browserName.equalsIgnoreCase("IE")) {
-			System.out.println("Launching IE browser");
-			System.setProperty("webdriver.edge.driver",
-					"C:\\Users\\sanke\\workspace\\Siebel_Web\\drivers\\MicrosoftWebDriver.exe");
-			driver = new EdgeDriver();
+		} else if (browserName.equalsIgnoreCase("Safari")) {
+			System.out.println("Launching Safari browser");
+			SafariOptions options = new SafariOptions();
+			driver = new SafariDriver(options);
 			driver.manage().window().maximize();
 			driver.manage().deleteAllCookies();
-			System.out.println("IE Browser Launched");
+			System.out.println("Safari Browser Launched");
 		}
-
+		
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return driver;
 

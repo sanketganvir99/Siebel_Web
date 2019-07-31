@@ -22,8 +22,7 @@ public class test_Runner {
 	public static void reportSetup() throws IOException {
 
 		Reporter.loadXMLConfig(new File("src/test/java/Siebel_extent-config.xml"));
-		Reporter.addScreenCaptureFromPath(
-				"D:/Sanket_Ganvir/BDDcucumber_GoJek_Amazon_Project/testReports/cucumber-Extent/failedCase_screenshots.png");
+		Reporter.addScreenCaptureFromPath("/Users/yml/git/Siebel_Web/testReports/cucumber_Extent/failedCase_screenshots.png");
 		
 	}
 

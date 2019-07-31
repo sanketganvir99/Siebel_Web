@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -120,7 +121,7 @@ public class steps extends browser_Setup {
 
 		Boolean b = driver.findElement(By.xpath(strArg1)).isDisplayed();
 		if (b.equals("true")) {
-			System.out.println("Asserting of the element with identifier done successfully");
+			System.out.println("Asserting of the element with xpath done successfully");
 		}
 	}
 
@@ -175,6 +176,15 @@ public class steps extends browser_Setup {
 		Select s = new Select(driver.findElement(By.id(strArg2)));
 		s.selectByValue(strArg1);
 	}
+	
+	@Then("^I assert for text \"([^\"]*)\" with xpath \"([^\"]*)\"$")
+    public void i_assert_for_text_something_with_xpath_something(String strArg1, String strArg2) throws Throwable {
+        String str1 = driver.findElement(By.xpath(strArg2)).getText();
+        String str2= strArg1;
+        if(str1.equals(str2)){
+        	System.out.println("Test asserted sucessfully");
+        }
+    }
 
 	@After
 	public void tearDown(Scenario scenario) {
@@ -185,7 +195,7 @@ public class steps extends browser_Setup {
 
 			try {
 				FileUtils.copyFile(scrFile, new File(
-						"D:/Sanket_Ganvir/BDDcucumber_GoJek_Amazon_Project/testReports/cucumber-extent/failedCase_screenshots.png"));
+						"/Users/yml/git/Siebel_Web/testReports/cucumber_Extent/failedCase_screenshots.png"));
 				System.out.println("Screenshot captured on failed case");
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -197,7 +207,7 @@ public class steps extends browser_Setup {
 	public static void tearDown() {
 
 		driver.close();
-		driver.quit();
+//		driver.quit();
 		driver = null;
 
 	}
